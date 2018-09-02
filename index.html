@@ -6,7 +6,14 @@
   <link href="main.css" rel="stylesheet">
 </head>
 <div id="app">
+    <h1>Vue.jsのサンプル</h1>
+    <input type="text" v-model="message">
     <p>{{ message }}</p>
+    <input type="text" v-model="wepon">
+    <button v-on:click="addWepon">ブキの追加</button>
+    <ul>
+        <li v-for="list in lists">{{ list }}</li>
+    </ul> 
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>

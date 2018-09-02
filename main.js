@@ -1,6 +1,18 @@
 var app = new Vue({
-    el: "#app",
+    el: '#app',
     data: {
-        message: "Hello, Vue.js!"
+        message: 'ここの文字が同期するよ。',
+        wepon: '',
+        lists: [
+            'スプラシューター',
+            'スプラローラー',
+            'スプラチャージャー',
+        ]
+    },
+    methods: {
+        addWepon: function() {
+            this.lists.push(this.wepon);
+            this.wepon = '';
+        }
     }
 })
