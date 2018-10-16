@@ -1,21 +1,61 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8">
-  <title>Vue.js App</title>
-  <link href="main.css" rel="stylesheet">
-</head>
-<div id="app">
-    <h1>Vue.jsのサンプル</h1>
-    <input type="text" v-model="message">
-    <p>{{ message }}</p>
-    <input type="text" v-model="wepon">
-    <button v-on:click="addWepon">ブキの追加</button>
-    <ul>
-        <li v-for="list in lists">{{ list }}</li>
-    </ul> 
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<link rel="stylesheet" href="./main.css">
+<script type="text/x-template" id="grid-template">
+    <table>
+      <thead>
+        <tr>
+          <th v-for="key in columns"
+            @click="sortBy(key)"
+            :class="{ active: sortKey == key }">
+            {{ key | capitalize }}
+            <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="entry in filteredData">
+          <td v-for="key in columns">
+            {{entry[key]}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </script>
+  
+  <!-- demo root element -->
+  <h1>スプラトゥーン成績管理アプリ</h1>
+  <div id="demo">
+    <p>{{status}}</p>
+    <demo-grid
+      :data="gridData"
+      :columns="gridColumns"
+      :filter-key="searchQuery">
+    </demo-grid>
+    <p></p>
+    <p>ルール</p>
+    <select v-model="rule">
+        <option disabled="disabled">選択してください</option>
+        <option value="ガチエリア">ガチエリア</option>
+        <option value="ガチヤグラ">ガチヤグラ</option>
+        <option value="ガチホコ">ガチホコ</option>
+        <option value="ガチアサリ">ガチアサリ</option>
+    </select>
+    <p>パワー</p>
+    <input type="text" v-model="power">
+    <p>ブキ</p>
+    <input type="text" v-model="wepon">
+    <p>ステージ</p>
+    <input type="text" v-model="stage">
+    <p>勝敗</p>
+    <select v-model="result">
+        <option disabled="disabled">選択してください</option>
+        <option value="WIN">WIN</option>
+        <option value="LOSE">LOSE</option>
+    </select>
+    <p>
+        <button v-on:click="addResult">追加</button>
+    </p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="./main.js"></script>
-</html>
